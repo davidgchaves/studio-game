@@ -36,21 +36,22 @@ end
 
 
 player1 = Player.new "moe"
-puts player1
-puts player1.health
-
 player2 = Player.new "larry", 60
-puts player2
-puts player2.health
-player2.name = "lawrence"
-puts player2.name
-
 player3 = Player.new "curly", 125
-puts player3
-puts player3.health
 
-player3.blam
-puts player3
+players = [player1, player2, player3]
+players.pop
+players.push Player.new("Shremp", 90)
 
-player3.w00t
-puts player3
+puts "There are #{players.length} players in the game:"
+players.each { |player| puts player }
+
+players.each do |player|
+  puts player.health
+end
+
+players.each do |player|
+  player.blam
+  2.times { player.w00t }
+  puts player
+end
