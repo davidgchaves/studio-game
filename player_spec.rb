@@ -3,7 +3,10 @@ require_relative 'player'
 describe Player do
   let(:initial_health) { 150 }
 
-  before { @player = Player.new "larry", initial_health }
+  before do
+    $stdout = StringIO.new      #supress (redirect) the standard output
+    @player = Player.new "larry", initial_health
+  end
 
   it "has a capitalized name" do
     expect(@player.name).to eq "Larry"
