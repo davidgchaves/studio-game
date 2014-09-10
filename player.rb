@@ -14,6 +14,10 @@ class Player
     @health + @name.length
   end
 
+  def strong?
+    @health > 100
+  end
+
   # NOTE: I wonder if the blam and w00t methods
   #       shouldn't be the perfect candidates for a Writer Monad.
   #       Obviously there's the issue with the @health mutation,
