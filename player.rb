@@ -33,6 +33,18 @@ class Player
     puts "#{@name} got w00ted!"
   end
 
+  def <=>(other_player)
+    other_player.score <=> score
+  end
+
+  def print_name_and_health
+    puts "#{@name} (#{@health})"
+  end
+
+  def pretty_print_name_and_score
+    puts "#{@name.ljust 20, '.'} #{@health}"
+  end
+
   def to_s
     "I'm #{@name} with a health of #{@health} and a score of #{score}."
   end
