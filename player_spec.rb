@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'treasure_trove'
 
 describe Player do
   let(:initial_health) { 150 }
@@ -17,11 +18,17 @@ describe Player do
   end
 
   it "has a string representation" do
-    expect(@player.to_s).to eq "I'm Larry with a health of 150 and a score of 155."
+    @player.found_treasure Treasure.new(:hammer, 50)
+    @player.found_treasure Treasure.new(:hammer, 50)
+
+    expect(@player.to_s).to eq "I'm Larry with health = 150, points = 100 and score = 250."
   end
 
-  it "computes a score based on health and name length" do
-    expect(@player.score).to eq initial_health + 5
+  it "computes a score as the sum o its health and points" do
+    @player.found_treasure Treasure.new(:hammer, 50)
+    @player.found_treasure Treasure.new(:hammer, 50)
+
+    expect(@player.score).to eq initial_health + 50 + 50
   end
 
   context "when w00ted" do
@@ -65,6 +72,20 @@ describe Player do
 
     it "is sorted by decreasing score by default" do
       expect(@players.sort).to eq [@player3, @player2, @player1]
+    end
+  end
+
+  context "when computing treasure points" do
+    it "stars with 0" do
+      expect(@player.points).to eq 0
+    end
+
+    it "adds the collected treasures" do
+      @player.found_treasure Treasure.new(:hammer, 50)
+      @player.found_treasure Treasure.new(:crowbar, 400)
+      @player.found_treasure Treasure.new(:hammer, 50)
+
+      expect(@player.points).to eq 50 + 400 + 50
     end
   end
 end

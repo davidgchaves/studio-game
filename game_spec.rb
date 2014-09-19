@@ -7,8 +7,9 @@ describe Game do
   before do
     $stdout = StringIO.new      #supress (redirect) the standard output
     @game = Game.new "Knuckleheads"
-    @player = Player.new "moe", initial_health
-    @game.add_player @player
+    @moe = Player.new "moe", initial_health
+    @larry = Player.new "larry", initial_health
+    @game.add_player @moe
   end
 
   it "w00ts the player if a high number is rolled" do
@@ -16,7 +17,7 @@ describe Game do
 
     @game.play 1
 
-    expect(@player.health).to eq initial_health + 15
+    expect(@moe.health).to eq initial_health + 15
   end
 
   it "skips the player if a medium number is rolled" do
@@ -24,7 +25,7 @@ describe Game do
 
     @game.play 1
 
-    expect(@player.health).to eq initial_health
+    expect(@moe.health).to eq initial_health
   end
 
   it "blams the player if a low number is rolled" do
@@ -32,7 +33,7 @@ describe Game do
 
     @game.play 1
 
-    expect(@player.health).to eq initial_health - 10
+    expect(@moe.health).to eq initial_health - 10
   end
 
   it "plays the expecified rounds" do
@@ -40,6 +41,22 @@ describe Game do
 
     @game.play 3
 
-    expect(@player.health).to eq initial_health + (15 * 3)
+    expect(@moe.health).to eq initial_health + (15 * 3)
+  end
+
+  it "assigns a treasure to a player during its turn" do
+    @game.play 1
+
+    expect(@moe.points).not_to eq 0
+  end
+
+  it "computes total points as the sum of all player points" do
+    @game.add_player @larry
+
+    @moe.found_treasure Treasure.new(:hammer, 50)
+    @moe.found_treasure Treasure.new(:hammer, 50)
+    @larry.found_treasure Treasure.new(:crowbar, 400)
+
+    expect(@game.total_points).to eq 50 + 50 + 400
   end
 end
