@@ -24,7 +24,7 @@ describe Player do
     expect(@player.to_s).to eq "I'm Larry with health = 150, points = 100 and score = 250."
   end
 
-  it "computes a score as the sum o its health and points" do
+  it "computes a score as the sum of its health and points" do
     @player.found_treasure Treasure.new(:hammer, 50)
     @player.found_treasure Treasure.new(:hammer, 50)
 
