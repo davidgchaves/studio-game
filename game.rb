@@ -38,7 +38,11 @@ class Game
     puts "\n#{@title} Statistics:"
     puts "#{total_points} total points from treasures found"
 
-    @players.each { |p| puts "\n#{p.name}'s point totals:\n#{p.points} grand total points" }
+    @players.each do |player|
+      puts "\n#{player.name}'s point totals:"
+      player.each_found_treasure { |t| puts "#{t.points} total #{t.name} points" }
+      puts "#{player.points} grand total points"
+    end
 
     strong_players, wimpy_players = @players.partition &:strong?
 
