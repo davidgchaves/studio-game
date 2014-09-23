@@ -59,7 +59,12 @@ class Player
   end
 
   def pretty_print_name_and_score
-    puts "#{@name.ljust 20, '.'} #{@health}"
+    "#{@name.ljust 20, '.'} #{score}"
+  end
+
+  def self.from_csv(line)
+    name, health = line.split ','
+    Player.new name, Integer(health)
   end
 
   def to_s

@@ -9,6 +9,17 @@ class Game
     @players = []
   end
 
+  def load_players(from_file)
+    File.readlines(from_file).each { |line| add_player Player.from_csv line }
+  end
+
+  def save_high_scores(to_file='high_scores.txt')
+    File.open(to_file, "w") do |file|
+      file.puts "#{@title} High Scores:"
+      @players.sort.each { |p| file.puts p.pretty_print_name_and_score }
+    end
+  end
+
   def add_player(player)
     @players.push player
   end
@@ -53,6 +64,6 @@ class Game
     wimpy_players.each &:print_name_and_health
 
     puts "\n#{@title} High Scores:"
-    @players.sort.each &:pretty_print_name_and_score
+    @players.sort.each { |p| puts p.pretty_print_name_and_score }
   end
 end

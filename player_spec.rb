@@ -50,6 +50,13 @@ describe Player do
     ]
   end
 
+  it "can be created from a CSV line" do
+    player = Player.from_csv "larry,200"
+
+    expect(player.name).to eq "Larry"
+    expect(player.health).to eq 200
+  end
+
   context "when w00ted" do
     before { @player.w00t }
 
