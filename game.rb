@@ -1,3 +1,4 @@
+require 'csv'
 require_relative 'game_turn'
 require_relative 'treasure_trove'
 
@@ -10,7 +11,7 @@ class Game
   end
 
   def load_players(from_file)
-    File.readlines(from_file).each { |line| add_player Player.from_csv line }
+    CSV.foreach(from_file) { |row| add_player Player.new row[0], row[1].to_i }
   end
 
   def save_high_scores(to_file='high_scores.txt')
