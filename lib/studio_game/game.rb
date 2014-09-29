@@ -15,7 +15,7 @@ module StudioGame
       CSV.foreach(from_file) { |row| add_player Player.new row[0], row[1].to_i }
     end
 
-    def save_high_scores(to_file='high_scores.txt')
+    def save_high_scores(to_file='logs/high_scores.txt')
       File.open(to_file, "w") do |file|
         file.puts "#{@title} High Scores:"
         @players.sort.each { |p| file.puts p.pretty_print_name_and_score }
