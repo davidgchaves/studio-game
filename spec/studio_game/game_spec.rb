@@ -1,5 +1,5 @@
-require_relative 'game'
-require_relative 'player'
+require_relative '../../lib/studio_game/game'
+require_relative '../../lib/studio_game/player'
 
 module StudioGame
   describe Game do

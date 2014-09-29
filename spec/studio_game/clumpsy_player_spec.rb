@@ -1,4 +1,4 @@
-require_relative 'clumpsy_player'
+require_relative '../../lib/studio_game/clumpsy_player'
 
 module StudioGame
   describe ClumpsyPlayer do

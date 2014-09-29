@@ -1,4 +1,4 @@
-require_relative 'berserk_player'
+require_relative '../../lib/studio_game/berserk_player'
 
 module StudioGame
   describe BerserkPlayer do
