@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative '../lib/studio_game/game'
 require_relative '../lib/studio_game/clumpsy_player'
 require_relative '../lib/studio_game/berserk_player'
